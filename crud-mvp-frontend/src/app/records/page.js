@@ -1,9 +1,7 @@
 import { Suspense } from "react";
-import dynamic from "next/dynamic";
+import RecordsClient from "./RecordsClient";
 
-export const dynamic = "force-dynamic";      // prevents static export
-
-const RecordsClient = dynamic(() => import("./RecordsClient"), { ssr: false });
+export const dynamic = "force-dynamic";
 
 export default function RecordsPage() {
   return (
