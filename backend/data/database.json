@@ -1,0 +1,101 @@
+{
+  "records": [
+    {
+      "name": "",
+      "description": "",
+      "singleLine": " eddininti snngngng edited hhbhbh",
+      "multiLine": "test2 edited",
+      "number": "21212121999999999999",
+      "email": "testEdited@test.com",
+      "phone": "212555549999999999999",
+      "singleSelect": "option2",
+      "multiSelect": [
+        "option2",
+        "option3"
+      ],
+      "file": "[object Object]",
+      "radioOption": "option2",
+      "checkbox": "false",
+      "date": "2025-04-18T18:30:00.000Z",
+      "dateRange": {
+        "start": "2025-04-02T18:30:00.000Z",
+        "end": "2025-04-10T18:30:00.000Z"
+      },
+      "time": "08:00",
+      "timeRange": {
+        "start": "",
+        "end": ""
+      },
+      "location": "22533.3369999",
+      "id": 7,
+      "dateRangeStart": "2025-04-17T18:30:00.000Z",
+      "dateRangeEnd": "2025-05-01T18:30:00.000Z",
+      "timeRangeStart": "",
+      "timeRangeEnd": ""
+    },
+    {
+      "name": "",
+      "description": "",
+      "singleLine": "Single Line Text",
+      "multiLine": "Multi Line Text\r\n",
+      "number": "123455",
+      "email": "email@test.com",
+      "phone": "21255554",
+      "singleSelect": "option1",
+      "radioOption": "option1",
+      "checkbox": "false",
+      "date": "2025-04-06T18:30:00.000Z",
+      "dateRangeStart": "2025-04-04T18:30:00.000Z",
+      "dateRangeEnd": "2025-04-18T18:30:00.000Z",
+      "time": "05:00",
+      "timeRangeStart": "",
+      "timeRangeEnd": "",
+      "location": "23.33,36.33",
+      "id": 8,
+      "multiSelect": [
+        "option2",
+        "option3"
+      ]
+    },
+    {
+      "name": "",
+      "description": "",
+      "singleLine": "test",
+      "multiLine": "",
+      "number": "",
+      "email": "",
+      "phone": "",
+      "singleSelect": "",
+      "radioOption": "",
+      "checkbox": "false",
+      "date": "",
+      "dateRangeStart": "",
+      "dateRangeEnd": "",
+      "time": "",
+      "timeRangeStart": "",
+      "timeRangeEnd": "",
+      "location": "",
+      "id": 9
+    },
+    {
+      "name": "",
+      "description": "",
+      "singleLine": "Testing in mobile",
+      "multiLine": "",
+      "number": "",
+      "email": "",
+      "phone": "",
+      "singleSelect": "",
+      "radioOption": "",
+      "checkbox": "false",
+      "date": "",
+      "dateRangeStart": "",
+      "dateRangeEnd": "",
+      "time": "",
+      "timeRangeStart": "",
+      "timeRangeEnd": "",
+      "location": "",
+      "id": 10
+    }
+  ]
+}

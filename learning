@@ -1,0 +1,45 @@
+Services folder - In the MVP model, the Presenter interacts with a Service Layer (which handles database operations).
+Controller - Since we are following the MVP (Model-View-Presenter) pattern, we will create a Presenter Layer (Controllers) that handles user requests.
+Routes - from routes , we will call controller function. controller functions will use database services function to add , update in database
+
+there are 3 paramters
+1.route parameter -  Used with url - example - api/records/:id
+2.query parameter -  Used with url with ?,& -  api/records?id=1&name=john
+3.body parameter - used in json body in post and put method - { "email": "test@example.com" }
+
+Parameter Type	    Source	      Example URL	                        Access in Express
+Route Parameter	    /path/:id	   /123	                                req.params.id
+Query Parameter	    ?key=value	   ?name=John&age=30	                req.query.name, req.query.age
+Body Parameter	    JSON data 	   { "email": "test@example.com" }	    req.body.email
+
+
+On development , there is npm run dev , while on production npm run build
+Feature	      Development (npm run dev)	              Production (npm run build)
+Speed	      Fast (Hot Reloading)	                  Optimized for Performance
+File Size	  Large	                                  Minified & Compressed
+Debugging	  Easy	                                  Difficult (Minified Code)
+Used in	      Development Mode	                      Deployment
+
+
+Why do we need services folder and  api.js file in frontend?
+=>This service file allows us to reuse API calls anywhere in the frontend.
+
+
+Below fields to add:
+=======================
+Single Line
+Multi Line
+Editor
+Number
+Email
+Phone
+Single Selection
+Multiple Selection
+File
+Radio Button
+Checkbox
+Date Picker
+Date Range
+Time Picker
+Time Range
+Location
