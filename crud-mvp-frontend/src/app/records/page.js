@@ -1,3 +1,4 @@
+export const dynamic = "force-dynamic";
 "use client";
 
 import { useRouter, useSearchParams } from "next/navigation";
@@ -8,7 +9,6 @@ import dynImport from "next/dynamic";        // ← give it any other name
 import "react-datepicker/dist/react-datepicker.css";
 
 
-export const dynamic = "force-dynamic";
 
 // ⬇️ DatePicker loads only in the browser; it’s skipped at build time
 const DatePicker = dynImport(() => import("react-datepicker"), {
