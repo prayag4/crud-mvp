@@ -3,8 +3,14 @@
 import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import { deleteRecord } from "@/services/api";
-import DatePicker from "react-datepicker";
+// import DatePicker from "react-datepicker";
+import dynamic from "next/dynamic";        // ⬅️ new
 import "react-datepicker/dist/react-datepicker.css";
+
+// ⬇️ DatePicker loads only in the browser; it’s skipped at build time
+const DatePicker = dynamic(() => import("react-datepicker"), {
+    ssr: false,
+  });
 
 export default function RecordsPage() {
     const router = useRouter();
