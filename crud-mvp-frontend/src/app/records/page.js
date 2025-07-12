@@ -7,6 +7,9 @@ import { deleteRecord } from "@/services/api";
 import dynamic from "next/dynamic";        // ⬅️ new
 import "react-datepicker/dist/react-datepicker.css";
 
+
+export const dynamic = "force-dynamic";
+
 // ⬇️ DatePicker loads only in the browser; it’s skipped at build time
 const DatePicker = dynamic(() => import("react-datepicker"), {
     ssr: false,
