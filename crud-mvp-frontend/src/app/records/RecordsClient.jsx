@@ -107,13 +107,13 @@ export default function RecordsPage() {
                         checkbox: data.record.checkbox === "true" ? true : false,
                         date: data.record.date ? new Date(data.record.date) : null,
                         dateRange: {
-                            start: data.record.dateRange?.start ? new Date(data.record.dateRange.start) : null,
-                            end: data.record.dateRange?.end ? new Date(data.record.dateRange.end) : null
+                            start: data.record.dateRangeStart ? new Date(data.record.dateRangeStart) : null,
+                            end: data.record.dateRangeEnd ? new Date(data.record.dateRangeEnd) : null
                         },
                         time: data.record.time || "",
                         timeRange: {
-                            start: data.record.timeRange?.start || "",
-                            end: data.record.timeRange?.end || ""
+                            start: data.record.timeRangeStart || "",
+                            end: data.record.timeRangeEnd || ""
                         },
                         location: data.record.location || ""
                     });
