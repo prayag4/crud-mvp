@@ -17,6 +17,7 @@ app.get('/', (req, res) => {
 app.use('/api/records', recordRoutes);
 
 const PORT = process.env.PORT || 5000;
+app.use('/uploads', express.static('uploads'));
 
 app.listen(PORT, '0.0.0.0', () => {
   console.log(`Server is running on http://0.0.0.0:${PORT}`);

@@ -131,4 +131,19 @@ const deleteRecord = (req, res) => {
     }
 };
 
-module.exports = { getAllRecords, addRecord, updateRecord, deleteRecord, getRecordByID };
+const getImageByID = (req, res) => {
+    try {
+        const db = readDatabase();
+        const recordID = parseInt(req.params.id);
+        const desiredRecord = db.records.find(record=>record.id===recordID)
+        const imagePath = desiredRecord.file.path
+        res.json(imagePath);
+    } catch (error) {
+        console.error('Error getting images:', error);
+        res.status(500).json({ error: 'Internal server error' });
+    }
+};
+
+
+
+module.exports = { getAllRecords, addRecord, updateRecord, deleteRecord, getRecordByID,getImageByID };

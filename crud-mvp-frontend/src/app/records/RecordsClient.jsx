@@ -3,7 +3,7 @@ export const dynamic = "force-dynamic";
 
 import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
-import { deleteRecord } from "@/services/api";
+import { deleteRecord,getImageURL } from "@/services/api";
 // import DatePicker from "react-datepicker";
 import dynImport from "next/dynamic";        // ← give it any other name
 import "react-datepicker/dist/react-datepicker.css";
@@ -92,6 +92,7 @@ export default function RecordsPage() {
                 }
                 const data = await res.json();
                 if (data.record) {
+                    let getImageURLfun = await getImageURL(recordId)
                     setNewRecord({
                         name: data.record.name || "",
                         description: data.record.description || "",
@@ -115,7 +116,8 @@ export default function RecordsPage() {
                             start: data.record.timeRangeStart || "",
                             end: data.record.timeRangeEnd || ""
                         },
-                        location: data.record.location || ""
+                        location: data.record.location || "",
+                        urlImage : `${process.env.API_URL}/records/${getImageURLfun}` || ""    
                     });
                 }
             } catch (err) {
@@ -314,18 +316,23 @@ export default function RecordsPage() {
                         />
                         {newRecord.file && (
                             <div className="mt-2">
-                                <p className="text-sm text-gray-600">Selected file: {newRecord.file.name}</p>
-                                {newRecord.file.type && newRecord.file.type.startsWith('image/') && (
-                                    <img 
-                                        src={URL.createObjectURL(newRecord.file)} 
-                                        alt="Preview" 
-                                        className="mt-2 max-h-32"
-                                    />
-                                )}
+                                {
+                                    newRecord.file.originalName && 
+                                    <>
+                                        <p className="text-sm text-gray-600">Selected file: {newRecord.file.originalName}</p>
+                                        <img 
+                                            // src={`http://localhost:5000/${newRecord.file.path}`} 
+                                            src={newRecord.urlImage} 
+                                            // src={}
+                                            alt="Preview" 
+                                            className="mt-2 max-h-32"
+                                        />
+                                    </>
+                                }
+
                             </div>
                         )}
                     </div>
-
                     {/* Radio Buttons */}
                     <div>
                         <label className="block text-sm font-medium text-gray-700 mb-1">

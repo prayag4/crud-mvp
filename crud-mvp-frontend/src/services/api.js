@@ -29,3 +29,10 @@ export async function deleteRecord(id) {
     });
     return response.json();
 }
+
+export async function getImageURL(id){
+    const response = await fetch(`${BASE_URL}/getImage/${id}`, {
+        method: "GET",
+    });
+    return response.json();
+}
