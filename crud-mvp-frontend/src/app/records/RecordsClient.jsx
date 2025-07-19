@@ -117,7 +117,7 @@ export default function RecordsPage() {
                             end: data.record.timeRangeEnd || ""
                         },
                         location: data.record.location || "",
-                        urlImage : `${process.env.API_URL}/records/${getImageURLfun}` || ""    
+                        urlImage : `${getImageURLfun}` || ""    
                     });
                 }
             } catch (err) {

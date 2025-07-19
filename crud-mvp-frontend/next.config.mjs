@@ -8,6 +8,10 @@ const nextConfig = {
         source: '/api/:path*',
         destination: `${process.env.API_URL}/api/:path*`, // ← uses env var
       },
+      {
+        source : '/uploads/:path*',
+        destination : `${process.env.API_URL}/uploads/:path*`,
+      }
     ];
   },
 
