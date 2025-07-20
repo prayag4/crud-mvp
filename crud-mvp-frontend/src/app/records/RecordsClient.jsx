@@ -92,7 +92,7 @@ export default function RecordsPage() {
                 }
                 const data = await res.json();
                 if (data.record) {
-                    let getImageURLfun = await getImageURL(recordId)
+                    // let getImageURLfun = await getImageURL(recordId)
                     setNewRecord({
                         name: data.record.name || "",
                         description: data.record.description || "",
@@ -117,7 +117,7 @@ export default function RecordsPage() {
                             end: data.record.timeRangeEnd || ""
                         },
                         location: data.record.location || "",
-                        urlImage : `${getImageURLfun}` || ""    
+                        // urlImage : `${getImageURLfun}` || ""    
                     });
                 }
             } catch (err) {
@@ -139,9 +139,13 @@ export default function RecordsPage() {
             // Add all fields to FormData
             Object.keys(newRecord).forEach(key => {
                 if (key === 'file') {
-                    if (newRecord.file) {
-                        formData.append('file', newRecord.file);
+                    if (newRecord.file instanceof File) {
+                        formData.append('file', newRecord.file); // new file
+                    } else if (newRecord.file?.path) {
+                        // Pass existing file path as a hidden fallback value
+                        formData.append('existingFilePath', newRecord.file.path);
                     }
+                
                 } else if (key === 'date') {
                     formData.append(key, newRecord[key] instanceof Date ? newRecord[key].toISOString() : '');
                 } else if (key === 'dateRange') {
@@ -322,7 +326,7 @@ export default function RecordsPage() {
                                         <p className="text-sm text-gray-600">Selected file: {newRecord.file.originalName}</p>
                                         <img 
                                             // src={`http://localhost:5000/${newRecord.file.path}`} 
-                                            src={newRecord.urlImage} 
+                                            src={newRecord.file.path} 
                                             // src={}
                                             alt="Preview" 
                                             className="mt-2 max-h-32"

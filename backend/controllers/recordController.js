@@ -75,28 +75,36 @@ const updateRecord = (req, res) => {
         const recordId = parseInt(req.params.id);
         const updatedData = {};
 
-        // Handle file upload if present
-        if (req.file) {
+        // 1. Handle file upload if new file is uploaded
+        if (req.file && req.file.path) {
             updatedData.file = {
                 path: req.file.path,
                 originalName: req.file.originalname,
                 mimeType: req.file.mimetype
             };
         }
+        // 2. Else preserve old file if existingFilePath is sent
+        else if (req.body.existingFilePath) {
+            const existingRecord = db.records.find(record => record.id === recordId);
+            if (existingRecord?.file?.path === req.body.existingFilePath) {
+                updatedData.file = existingRecord.file;
+            }
+        } else {
+            // No file uploaded and no fallback — clear it
+            updatedData.file = null;
+        }
 
-        // Handle all form fields
+        // 3. Handle other fields
         Object.keys(req.body).forEach(key => {
             if (key.endsWith('[]')) {
-                // Handle array fields (like multiSelect)
                 const fieldName = key.slice(0, -2);
                 updatedData[fieldName] = Array.isArray(req.body[key]) ? req.body[key] : [req.body[key]];
-            } else {
+            } else if (key !== "existingFilePath") {
                 updatedData[key] = req.body[key];
             }
         });
 
         const recordIndex = db.records.findIndex(record => record.id === recordId);
-
         if (recordIndex === -1) {
             return res.status(404).json({ error: 'Record not found' });
         }
@@ -109,6 +117,7 @@ const updateRecord = (req, res) => {
         res.status(500).json({ error: 'Internal server error' });
     }
 };
+
 
 // ✅ Delete a record by ID
 const deleteRecord = (req, res) => {
