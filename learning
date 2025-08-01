@@ -2,6 +2,9 @@ Services folder - In the MVP model, the Presenter interacts with a Service Layer
 Controller - Since we are following the MVP (Model-View-Presenter) pattern, we will create a Presenter Layer (Controllers) that handles user requests.
 Routes - from routes , we will call controller function. controller functions will use database services function to add , update in database
 
+https://chatgpt.com/share/688c12d4-5aa0-8009-bfa5-29366ccffdf5
+
+
 there are 3 paramters
 1.route parameter -  Used with url - example - api/records/:id
 2.query parameter -  Used with url with ?,& -  api/records?id=1&name=john
