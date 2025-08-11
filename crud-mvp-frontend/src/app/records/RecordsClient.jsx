@@ -455,7 +455,7 @@ export default function RecordsPage() {
                         />
                     </div>
 
-                    {/* Time Range */}
+                    {/* Time Range 
                     <div>
                         <label className="block text-sm font-medium text-gray-700 mb-1">
                             Time Range
@@ -486,6 +486,7 @@ export default function RecordsPage() {
                             </div>
                         </div>
                     </div>
+                    */}
 
                     {/* Location */}
                     <div>
