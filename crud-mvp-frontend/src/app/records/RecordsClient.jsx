@@ -6,8 +6,12 @@ import { useEffect, useState } from "react";
 import { deleteRecord,getImageURL } from "@/services/api";
 // import DatePicker from "react-datepicker";
 import dynImport from "next/dynamic";        // ← give it any other name
+// import dynamic from "next/dynamic";        // ← give it any other name
 import "react-datepicker/dist/react-datepicker.css";
 
+const TinyMCEEditor = dynImport(() => import("./components/TinyMCEEditor"), {
+    ssr: false,
+  });
 
 
 // ⬇️ DatePicker loads only in the browser; it’s skipped at build time
@@ -26,6 +30,7 @@ export default function RecordsPage() {
         description: "",
         singleLine: "",
         multiLine: "",
+        richText: "",
         number: "",
         email: "",
         phone: "",
@@ -68,6 +73,7 @@ export default function RecordsPage() {
                     description: "",
                     singleLine: "",
                     multiLine: "",
+                    richText: "",
                     number: "",
                     email: "",
                     phone: "",
@@ -98,6 +104,7 @@ export default function RecordsPage() {
                         description: data.record.description || "",
                         singleLine: data.record.singleLine || "",
                         multiLine: data.record.multiLine || "",
+                        richText: data.record.richText || "",
                         number: data.record.number || "",
                         email: data.record.email || "",
                         phone: data.record.phone || "",
@@ -196,11 +203,12 @@ export default function RecordsPage() {
                     {/* Single Line Text */}
                     <div>
                         <label htmlFor="singleLine" className="block text-sm font-medium text-gray-700 mb-1">
-                            Single Line Text
+                            Single Line *
                         </label>
                         <input
                             id="singleLine"
                             type="text"
+                            required
                             value={newRecord.singleLine}
                             onChange={(e) => setNewRecord({...newRecord, singleLine: e.target.value})}
                             className="border border-gray-300 p-2 w-full rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 bg-white"
@@ -210,7 +218,7 @@ export default function RecordsPage() {
                     {/* Multi Line Text */}
                     <div>
                         <label htmlFor="multiLine" className="block text-sm font-medium text-gray-700 mb-1">
-                            Multi Line Text
+                            Multi Line
                         </label>
                         <textarea
                             id="multiLine"
@@ -218,6 +226,16 @@ export default function RecordsPage() {
                             onChange={(e) => setNewRecord({...newRecord, multiLine: e.target.value})}
                             className="border border-gray-300 p-2 w-full rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 bg-white"
                             rows="4"
+                        />
+                    </div>
+                     {/* ✅ TinyMCE Rich Text Editor */}
+                    <div>
+                        <label htmlFor="richText" className="block text-sm font-medium text-gray-700 mb-1">
+                            Rich Text Editor
+                        </label>
+                        <TinyMCEEditor
+                            value={newRecord.richText}
+                            onChange={(content) => setNewRecord({ ...newRecord, richText: content })}
                         />
                     </div>
 
@@ -435,6 +453,7 @@ export default function RecordsPage() {
                                     scrollableYearDropdown
                                     yearDropdownItemNumber={100}
                                     placeholderText="DD-MM-YYYY"
+
                                 />
                             </div>
                         </div>
