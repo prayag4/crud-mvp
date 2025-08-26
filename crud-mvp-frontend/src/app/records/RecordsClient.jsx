@@ -3,7 +3,7 @@ export const dynamic = "force-dynamic";
 
 import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
-import { deleteRecord,getImageURL } from "@/services/api";
+import { deleteRecord, getImageURL } from "@/services/api";
 // import DatePicker from "react-datepicker";
 import dynImport from "next/dynamic";        // ← give it any other name
 // import dynamic from "next/dynamic";        // ← give it any other name
@@ -11,13 +11,13 @@ import "react-datepicker/dist/react-datepicker.css";
 
 const TinyMCEEditor = dynImport(() => import("./components/TinyMCEEditor"), {
     ssr: false,
-  });
+});
 
 
 // ⬇️ DatePicker loads only in the browser; it’s skipped at build time
 const DatePicker = dynImport(() => import("react-datepicker"), {
     ssr: false,
-  });
+});
 export default function RecordsPage() {
     const router = useRouter();
     const searchParams = useSearchParams();
@@ -142,7 +142,7 @@ export default function RecordsPage() {
 
         try {
             const formData = new FormData();
-            
+
             // Add all fields to FormData
             Object.keys(newRecord).forEach(key => {
                 if (key === 'file') {
@@ -152,7 +152,7 @@ export default function RecordsPage() {
                         // Pass existing file path as a hidden fallback value
                         formData.append('existingFilePath', newRecord.file.path);
                     }
-                
+
                 } else if (key === 'date') {
                     formData.append(key, newRecord[key] instanceof Date ? newRecord[key].toISOString() : '');
                 } else if (key === 'dateRange') {
@@ -177,7 +177,7 @@ export default function RecordsPage() {
             const res = await fetch(url, {
                 method,
                 body: formData,
-                
+
             });
 
             if (!res.ok) {
@@ -188,7 +188,7 @@ export default function RecordsPage() {
             const data = await res.json();
             fetchRecords(); // Refresh records after update/add
             router.push("/records"); // Navigate back to list
-       console.log(formData);
+            console.log(formData);
         } catch (err) {
             console.error("Error saving record:", err);
         }
@@ -210,7 +210,7 @@ export default function RecordsPage() {
                             type="text"
                             required
                             value={newRecord.singleLine}
-                            onChange={(e) => setNewRecord({...newRecord, singleLine: e.target.value})}
+                            onChange={(e) => setNewRecord({ ...newRecord, singleLine: e.target.value })}
                             className="border border-gray-300 p-2 w-full rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 bg-white"
                         />
                     </div>
@@ -223,12 +223,12 @@ export default function RecordsPage() {
                         <textarea
                             id="multiLine"
                             value={newRecord.multiLine}
-                            onChange={(e) => setNewRecord({...newRecord, multiLine: e.target.value})}
+                            onChange={(e) => setNewRecord({ ...newRecord, multiLine: e.target.value })}
                             className="border border-gray-300 p-2 w-full rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 bg-white"
                             rows="4"
                         />
                     </div>
-                     {/* ✅ TinyMCE Rich Text Editor */}
+                    {/* ✅ TinyMCE Rich Text Editor */}
                     <div>
                         <label htmlFor="richText" className="block text-sm font-medium text-gray-700 mb-1">
                             Rich Text Editor
@@ -248,7 +248,7 @@ export default function RecordsPage() {
                             id="number"
                             type="number"
                             value={newRecord.number}
-                            onChange={(e) => setNewRecord({...newRecord, number: e.target.value})}
+                            onChange={(e) => setNewRecord({ ...newRecord, number: e.target.value })}
                             className="border border-gray-300 p-2 w-full rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 bg-white"
                         />
                     </div>
@@ -262,7 +262,7 @@ export default function RecordsPage() {
                             id="email"
                             type="email"
                             value={newRecord.email}
-                            onChange={(e) => setNewRecord({...newRecord, email: e.target.value})}
+                            onChange={(e) => setNewRecord({ ...newRecord, email: e.target.value })}
                             className="border border-gray-300 p-2 w-full rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 bg-white"
                         />
                     </div>
@@ -276,7 +276,7 @@ export default function RecordsPage() {
                             id="phone"
                             type="tel"
                             value={newRecord.phone}
-                            onChange={(e) => setNewRecord({...newRecord, phone: e.target.value})}
+                            onChange={(e) => setNewRecord({ ...newRecord, phone: e.target.value })}
                             className="border border-gray-300 p-2 w-full rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 bg-white"
                         />
                     </div>
@@ -289,7 +289,7 @@ export default function RecordsPage() {
                         <select
                             id="singleSelect"
                             value={newRecord.singleSelect}
-                            onChange={(e) => setNewRecord({...newRecord, singleSelect: e.target.value})}
+                            onChange={(e) => setNewRecord({ ...newRecord, singleSelect: e.target.value })}
                             className="border border-gray-300 p-2 w-full rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 bg-white"
                         >
                             <option value="">Select an option</option>
@@ -311,7 +311,7 @@ export default function RecordsPage() {
                             value={newRecord.multiSelect}
                             onChange={(e) => {
                                 const selectedOptions = Array.from(e.target.selectedOptions, option => option.value);
-                                setNewRecord({...newRecord, multiSelect: selectedOptions});
+                                setNewRecord({ ...newRecord, multiSelect: selectedOptions });
                             }}
                             className="border border-gray-300 p-2 w-full rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 bg-white"
                         >
@@ -332,21 +332,21 @@ export default function RecordsPage() {
                         <input
                             id="file"
                             type="file"
-                            onChange={(e) => setNewRecord({...newRecord, file: e.target.files[0]})}
+                            onChange={(e) => setNewRecord({ ...newRecord, file: e.target.files[0] })}
                             className="border border-gray-300 p-2 w-full rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 bg-white"
                             accept=".jpg,.jpeg,.png,.pdf"
                         />
                         {newRecord.file && (
                             <div className="mt-2">
                                 {
-                                    newRecord.file.originalName && 
+                                    newRecord.file.originalName &&
                                     <>
                                         <p className="text-sm text-gray-600">Selected file: {newRecord.file.originalName}</p>
-                                        <img 
+                                        <img
                                             // src={`http://localhost:5000/${newRecord.file.path}`} 
-                                            src={newRecord.file.path} 
+                                            src={newRecord.file.path}
                                             // src={}
-                                            alt="Preview" 
+                                            alt="Preview"
                                             className="mt-2 max-h-32"
                                         />
                                     </>
@@ -366,7 +366,7 @@ export default function RecordsPage() {
                                     type="radio"
                                     value="option1"
                                     checked={newRecord.radioOption === "option1"}
-                                    onChange={(e) => setNewRecord({...newRecord, radioOption: e.target.value})}
+                                    onChange={(e) => setNewRecord({ ...newRecord, radioOption: e.target.value })}
                                     className="mr-2 text-blue-500"
                                 />
                                 <span className="text-gray-700">Option 1</span>
@@ -376,7 +376,7 @@ export default function RecordsPage() {
                                     type="radio"
                                     value="option2"
                                     checked={newRecord.radioOption === "option2"}
-                                    onChange={(e) => setNewRecord({...newRecord, radioOption: e.target.value})}
+                                    onChange={(e) => setNewRecord({ ...newRecord, radioOption: e.target.value })}
                                     className="mr-2 text-blue-500"
                                 />
                                 <span className="text-gray-700">Option 2</span>
@@ -390,7 +390,7 @@ export default function RecordsPage() {
                             <input
                                 type="checkbox"
                                 checked={newRecord.checkbox === true}
-                                onChange={(e) => setNewRecord({...newRecord, checkbox: e.target.checked})}
+                                onChange={(e) => setNewRecord({ ...newRecord, checkbox: e.target.checked })}
                                 className="mr-2 text-blue-500"
                             />
                             <span className="text-sm font-medium text-gray-700">Checkbox</span>
@@ -405,7 +405,7 @@ export default function RecordsPage() {
                         <DatePicker
                             id="date"
                             selected={newRecord.date}
-                            onChange={(date) => setNewRecord({...newRecord, date})}
+                            onChange={(date) => setNewRecord({ ...newRecord, date })}
                             className="border border-gray-300 p-2 w-full rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 bg-white"
                             dateFormat="dd-MM-yyyy"
                             minDate={new Date(1900, 0, 1)}
@@ -429,7 +429,7 @@ export default function RecordsPage() {
                                 <DatePicker
                                     id="dateRangeStart"
                                     selected={newRecord.dateRange.start}
-                                    onChange={(date) => setNewRecord({...newRecord, dateRange: {...newRecord.dateRange, start: date}})}   
+                                    onChange={(date) => setNewRecord({ ...newRecord, dateRange: { ...newRecord.dateRange, start: date } })}
                                     className="border border-gray-300 p-2 w-full rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 bg-white"
                                     dateFormat="dd-MM-yyyy"
                                     minDate={new Date(1900, 0, 1)}
@@ -446,7 +446,7 @@ export default function RecordsPage() {
                                 <DatePicker
                                     id="dateRangeEnd"
                                     selected={newRecord.dateRange.end}
-                                    onChange={(date) => setNewRecord({...newRecord, dateRange: {...newRecord.dateRange, end: date}})}
+                                    onChange={(date) => setNewRecord({ ...newRecord, dateRange: { ...newRecord.dateRange, end: date } })}
                                     className="border border-gray-300 p-2 w-full rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 bg-white"
                                     dateFormat="dd-MM-yyyy"
                                     minDate={newRecord.dateRange.start || new Date(1900, 0, 1)}
@@ -469,9 +469,9 @@ export default function RecordsPage() {
                         </label>
                         <input
                             id="time"
-                            type="time"
+                            type="text"
                             value={newRecord.time}
-                            onChange={(e) => setNewRecord({...newRecord, time: e.target.value})}
+                            onChange={(e) => setNewRecord({ ...newRecord, time: e.target.value })}
                             className="border border-gray-300 p-2 w-full rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 bg-white"
                             step="300"
                         />
@@ -519,7 +519,7 @@ export default function RecordsPage() {
                             id="location"
                             type="text"
                             value={newRecord.location}
-                            onChange={(e) => setNewRecord({...newRecord, location: e.target.value})}
+                            onChange={(e) => setNewRecord({ ...newRecord, location: e.target.value })}
                             placeholder="Enter location"
                             className="border border-gray-300 p-2 w-full rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 bg-white"
                         />
@@ -547,7 +547,7 @@ export default function RecordsPage() {
         <div className="p-5">
             <h1 className="text-2xl font-bold">Records</h1>
             <button
-                onClick={() =>{ router.push("/records?form=true")}}
+                onClick={() => { router.push("/records?form=true") }}
                 className="bg-green-500 text-white px-4 py-2 my-4"
             >
                 Add Record
@@ -575,9 +575,9 @@ export default function RecordsPage() {
                                 >
                                     Edit
                                 </button>
-                                <button 
-                                onClick={async ()=>{await deleteRecord(record.id),fetchRecords()}}
-                                className="bg-red-500 text-white px-2 py-1">Delete</button>
+                                <button
+                                    onClick={async () => { await deleteRecord(record.id), fetchRecords() }}
+                                    className="bg-red-500 text-white px-2 py-1">Delete</button>
                             </td>
                         </tr>
                     ))}
