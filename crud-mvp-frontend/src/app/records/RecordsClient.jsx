@@ -411,6 +411,7 @@ export default function RecordsPage() {
                             minDate={new Date(1900, 0, 1)}
                             maxDate={new Date(2100, 11, 31)}
                             showYearDropdown
+                            showMonthDropdown
                             scrollableYearDropdown
                             yearDropdownItemNumber={100}
                             placeholderText="DD-MM-YYYY"
@@ -434,6 +435,7 @@ export default function RecordsPage() {
                                     minDate={new Date(1900, 0, 1)}
                                     maxDate={new Date(2100, 11, 31)}
                                     showYearDropdown
+                                    showMonthDropdown
                                     scrollableYearDropdown
                                     yearDropdownItemNumber={100}
                                     placeholderText="DD-MM-YYYY"
@@ -450,6 +452,7 @@ export default function RecordsPage() {
                                     minDate={newRecord.dateRange.start || new Date(1900, 0, 1)}
                                     maxDate={new Date(2100, 11, 31)}
                                     showYearDropdown
+                                    showMonthDropdown
                                     scrollableYearDropdown
                                     yearDropdownItemNumber={100}
                                     placeholderText="DD-MM-YYYY"
