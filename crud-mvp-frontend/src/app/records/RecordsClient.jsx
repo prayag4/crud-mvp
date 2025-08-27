@@ -548,7 +548,7 @@ export default function RecordsPage() {
             <h1 className="text-2xl font-bold">Records</h1>
             <button
                 onClick={() => { router.push("/records?form=true") }}
-                className="bg-green-500 text-white px-4 py-2 my-4"
+                className="bg-green-500 text-white px-4 py-2 my-4 hover:bg-green-600"
             >
                 Add Record
             </button>
@@ -557,7 +557,7 @@ export default function RecordsPage() {
                 <thead>
                     <tr>
                         <th className="border p-2">ID</th>
-                        <th className="border p-2">Single Line Text</th>
+                        <th className="border p-2">Single Line</th>
                         <th className="border p-2">Number</th>
                         <th className="border p-2">Actions</th>
                     </tr>
@@ -571,13 +571,23 @@ export default function RecordsPage() {
                             <td className="border p-2">
                                 <button
                                     onClick={() => router.push(`/records?form=true&id=${record.id}`)}
-                                    className="bg-yellow-500 text-white px-2 py-1 mr-2"
+                                    className="bg-yellow-500 text-white px-2 py-1 mr-2 hover:bg-yellow-600"
                                 >
                                     Edit
                                 </button>
                                 <button
-                                    onClick={async () => { await deleteRecord(record.id), fetchRecords() }}
-                                    className="bg-red-500 text-white px-2 py-1">Delete</button>
+                                    onClick={async () => {
+                                        const confirmed = window.confirm("Are you sure you want to delete this record?");
+                                        if (confirmed) {
+                                            await deleteRecord(record.id);
+                                            fetchRecords();
+                                        }
+                                    }}
+                                    className="bg-red-500 text-white px-2 py-1 hover:bg-red-600"
+                                >
+                                    Delete
+                                </button>
+
                             </td>
                         </tr>
                     ))}
